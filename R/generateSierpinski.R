@@ -1,10 +1,11 @@
 
+
 generateSierpinski <- function(rows) {
   # generate the rows and return them
   mat = matrix(0, nrow = rows, ncol = 2)
   colnames(mat) = c("x", "y")
-
-    for (i in seq_len(rows - 1)) {
+  
+  for (i in seq_len(rows - 1)) {
     vertex = sampleVertex(3)
     point = mat[i, ]
     next.point = stepToVertex(point, vertex, 0.5)
@@ -17,11 +18,7 @@ generateSierpinski <- function(rows) {
 # n: number of vertices (e.g. n=3: Triangle)
 # Return a vector of length 2 with x and y coordinates
 sampleVertex <- function(n) {
-  midpoint = c(x=0.5, y=0.5 / tan(pi / n))
-  radius = 0.5 / sin(pi / n)
-  angle = 2 * pi / n * (sample(n, 1))
-
-  midpoint + radius * c(sin(angle), cos(angle))
+  c(x=1, y=1)
 }
 
 # Create a point that is a step from `from` to `to`
@@ -31,5 +28,5 @@ sampleVertex <- function(n) {
 #   * step.size = 1 --> end up at `to`
 #   * step.size = 0.5 --> halfway between `from` and `to`
 stepToVertex <- function(from, to, step.size) {
-  c(x=0, y=0)
+  from * (1 - step.size) + to * step.size
 }
